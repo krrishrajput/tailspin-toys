@@ -39,11 +39,19 @@ const games = await getAllGames(getDatabase());
 - Include common elements: `<head>`, navigation, footer
 - Import global styles in layouts
 
+## Component Contracts and Comments
+
+- Every reusable `.astro` component must define and document its `Props` interface in frontmatter. Explain what each prop controls, including defaults, optional behavior, and any accessibility or rendering implications.
+- Keep component API documentation close to the `Props` declaration so it remains discoverable and changes with the contract.
+- Use comments to explain intent, constraints, or non-obvious rendering decisions. Do not add comments that merely paraphrase markup or expressions.
+- Treat stale comments as bugs: update or remove them whenever the related component changes.
+
 ### Layout Example
 
 ```astro
 ---
 interface Props {
+  /** Page title shown in the document head. */
   title: string;
 }
 const { title } = Astro.props;
@@ -120,3 +128,9 @@ There is no Svelte/React layer. When a page genuinely needs client behaviour, ad
 - Minimize client-side JavaScript — the default is zero JS shipped
 - Import and use global CSS styles from layouts
 - Always include a `data-testid` on interactive elements (see `ui.instructions.md`)
+
+## TypeScript Formatting
+
+- Use the repository's existing formatting style: four-space indentation in Astro frontmatter and markup, semicolons for TypeScript statements, single quotes for TypeScript strings, and trailing commas in multiline declarations.
+- Keep one prop per line in multiline `Props` interfaces and use explicit types for props and helper return values.
+- Run ESLint after changing TypeScript or Astro files. ESLint enforces explicit types at TypeScript module boundaries; it does not replace the formatting conventions above.
