@@ -39,5 +39,9 @@ export default [
     languageOptions: {
       parser: tseslint.parser,
     },
+    rules: {
+      // Public TypeScript APIs must expose their parameter and return contracts.
+      "@typescript-eslint/explicit-module-boundary-types": "error",
+    },
   },
 ];
